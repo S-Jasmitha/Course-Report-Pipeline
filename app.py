@@ -7,9 +7,8 @@ def generate_report(course_name, student_count):
     print("Report build_report.txt generated successfully.")
 
 if __name__ == "__main__":
-    # Check if parameters were correctly passed from Jenkins
+    # If Jenkins passes arguments, use them. Otherwise use defaults.
     if len(sys.argv) > 2:
         generate_report(sys.argv[1], sys.argv[2])
     else:
-        # Default fallback values
         generate_report("DevOps Engineering", "45")
