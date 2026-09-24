@@ -24,8 +24,8 @@ pipeline {
                     echo "WORKSPACE: ${env.WORKSPACE}"
                     echo "=========================================="
                     
-                    // Fallback execution style to handle different server environments
-                    sh "python3 app.py '${params.COURSE_NAME}' '${params.STUDENT_COUNT}' || python app.py '${params.COURSE_NAME}' '${params.STUDENT_COUNT}'"
+                    // Uses 'bat' instead of 'sh' for Windows hosts
+                    bat "python app.py \"%COURSE_NAME%\" \"%STUDENT_COUNT%\""
                 }
             }
         }
