@@ -23,16 +23,15 @@ pipeline {
                     echo "JOB NAME: ${env.JOB_NAME}"
                     echo "WORKSPACE: ${env.WORKSPACE}"
                     echo "=========================================="
-
-                    // Run the Python script with parameter inputs
-                    sh "python3 app.py '${params.COURSE_NAME}' '${params.STUDENT_COUNT}'"
+                    
+                    // Fallback execution style to handle different server environments
+                    sh "python3 app.py '${params.COURSE_NAME}' '${params.STUDENT_COUNT}' || python app.py '${params.COURSE_NAME}' '${params.STUDENT_COUNT}'"
                 }
             }
         }
 
         stage('Archive Report') {
             steps {
-                // Archive the artifact and enable fingerprinting
                 archiveArtifacts artifacts: 'build_report.txt', fingerprint: true
             }
         }
